@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * 设计语言：Minimal · Playful · Editorial
+ * - 纸张色底 + 细线分栏（Editorial）
+ * - 去卡片化、去阴影，只留字号与留白的层级（Minimal）
+ * - 手写体注记 + 手绘圈线箭头作为唯一"装饰"（Playful）
+ */
+@layer base {
+  :root {
+    /* 纸与墨：底是暖白纸色，字是近黑，重点色走蓝 */
+    --paper: 44 27% 95%;
+    --paper-raised: 45 40% 98%;
+    --ink: 220 13% 9%;
+
+    /* shadcn 语义变量映射到同一套色，保证 ui/ 组件不跑偏 */
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--paper-raised);
+    --card-foreground: var(--ink);
+    --popover: var(--paper-raised);
+    --popover-foreground: var(--ink);
+    --primary: 44 43% 67%;
+    --primary-foreground: var(--ink);
+    --secondary: 44 20% 92%;
+    --secondary-foreground: var(--ink);
+    --muted: 44 20% 92%;
+    --muted-foreground: 30 5% 45%;
+    --accent: 44 22% 90%;
+    --accent-foreground: var(--ink);
+    --destructive: 14 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 42 20% 87%;
+    --input: 42 20% 87%;
+    --ring: 44 43% 67%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-family: 'Inter', -apple-system, 'Noto Sans SC', 'PingFang SC', sans-serif;
+    font-feature-settings: 'cv05' 1, 'ss01' 1;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(207, 188, 133, 0.5);
+    color: #14161a;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d7d1c5;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #bfb8a9;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* 字体角色 */
+  .font-paper {
+    font-family: Georgia, 'Times New Roman', 'Songti SC', serif;
+  }
+
+  /* Editorial：小标签（栏目名 / 眉题） */
+  .label-xs {
+    @apply font-mono text-[10px] uppercase tracking-[0.22em] text-ink-mute;
+  }
+  .tracking-mega {
+    letter-spacing: 0.28em;
+  }
+
+  /* 所有手写体统一用墨绿色（覆盖各处 text-* 颜色） */
+  .font-hand {
+    color: #234A22;
+  }
+
+  /* Playful：荧光笔划过的一行字 */
+  .marker {
+    background-image: linear-gradient(transparent 58%, rgba(35, 74, 34, 0.26) 58%, rgba(35, 74, 34, 0.26) 94%, transparent 94%);
+    padding-inline: 0.08em;
+  }
+  .marker-blue {
+    background-image: linear-gradient(transparent 58%, rgba(207, 188, 133, 0.55) 58%, rgba(207, 188, 133, 0.55) 94%, transparent 94%);
+  }
+
+  /* 颗粒：纸面上很轻的一层，太重会脏 */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+
+  /*
+   * 正文区背景光影层的静态样式（配合 components/PaperGlow.tsx）。
+   * 位移、缩放、明暗全部由那边的 rAF 循环写在 transform / opacity 上，
+   * 这里只留混合模式和模糊——它们一旦进动画就会触发重绘。
+   */
+  .glow-blob {
+    border-radius: 9999px;
+    mix-blend-mode: multiply;
+    filter: blur(58px);
+    will-change: transform, opacity;
+  }
+  /* 高光是唯一提亮的一层，不能走 multiply（那样只会把纸压暗） */
+  .glow-highlight {
+    border-radius: 9999px;
+    filter: blur(40px);
+    will-change: transform, opacity;
+  }
+  .glow-shaft {
+    transform-origin: top center;
+    transform: rotate(20deg);
+    opacity: 0.42;
+    filter: blur(34px);
+    will-change: transform, opacity;
+  }
+  .glow-shade {
+    mix-blend-mode: multiply;
+    filter: blur(44px);
+  }
+  .glow-halo {
+    border-radius: 9999px;
+    filter: blur(46px);
+    will-change: transform, opacity;
+  }
+
+  /* 照片：不套相框也不描边，只垫一层很淡的投影，免得直接贴在纸上显得是块色斑 */
+  .photo-shadow {
+    box-shadow: 0 14px 28px -18px rgba(30, 26, 20, 0.4);
+  }
+
+  /* 唱片：纸面上的一张黑胶 */
+  .record-disc {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    color: #f3efe6;
+    background:
+      radial-gradient(circle at 62% 22%, rgba(255, 255, 255, 0.35), transparent 9%),
+      repeating-radial-gradient(circle, #17181c 0 2px, #34363d 2.5px 3.3px, #17181c 4px 5px);
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.18), inset -3px -3px 7px rgba(0, 0, 0, 0.55);
+  }
+  .record-disc::before {
+    content: '';
+    position: absolute;
+    width: 38%;
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background: radial-gradient(circle, #fffdf8 0 8%, #234a22 10% 58%, #163016 60% 100%);
+    box-shadow: 0 0 0 2px rgba(255, 253, 248, 0.3);
+  }
+  .record-disc span {
+    position: relative;
+    z-index: 1;
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+  .record-spin {
+    animation: record-spin 3.8s linear infinite;
+  }
+  @keyframes record-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .record-spin {
+      animation: none;
+    }
+  }
+}

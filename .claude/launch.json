@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gerenzhan",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8644", "--directory", "/Applications/  /个人站"],
+      "port": 8644
+    },
+    {
+      "name": "dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Applications/  /个人站/app", "run", "dev"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}
