@@ -159,9 +159,10 @@ export default function PileCollage() {
       {/*
         两张纸片。窄屏放不下这么小的字，也没有空位，sm 以下直接不出现。
         登机牌 z-30 压在 golden hour 右下角上面（避开画面里的人和下面那行说明）；票根摊在最下面一排。
+        不给宽度：尺寸由 PaperScraps 内部按内容算，宽屏下不会被拉成两张大卡片。
       */}
-      <BoardingPass className="absolute right-[1%] top-[68%] z-30 hidden w-[20%] rotate-[5deg] sm:flex" />
-      <TicketStub className="absolute left-[3%] top-[90%] z-20 hidden w-[28%] rotate-[2deg] sm:flex" />
+      <BoardingPass className="absolute right-[1%] top-[68%] z-30 hidden rotate-[5deg] sm:flex" />
+      <TicketStub className="absolute left-[3%] top-[90%] z-20 hidden rotate-[2deg] sm:flex" />
 
       <PhotoLightbox
         photos={PHOTOS.map((p) => p.src)}

@@ -20,6 +20,9 @@ export const PAGES = siteContent.nav as { key: PageKey; label: string; en: strin
 
 const EMAIL = siteContent.identity.email
 const EMAIL_HREF = siteContent.identity.emailHref
+/* 侧栏窄，读者把字号调大时邮箱要折行。只在 @ 前留一个折行点，
+   否则 overflow-wrap 会从中间断开，出现 "…163.co / m" 这种断法。 */
+const [EMAIL_LOCAL, EMAIL_DOMAIN] = EMAIL.split('@')
 const COMMON = siteContent.common
 
 /** 字标：FL.SUN，中间那个点是重点色 */
@@ -43,7 +46,10 @@ export default function Sidebar({
   return (
     <>
       {/* 桌面端：左侧窄目录，只用一条细线与正文分栏 */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[188px] flex-col overflow-hidden border-r border-rule px-8 py-10 lg:flex">
+      {/* 216px / px-7 = 160px 内容宽：容得下最长的一项加上手绘圈两侧各 14px 的出血，
+          浏览器把最小字号顶到 16px 时（153px）也还有余量。
+          原来 188px / px-8 内容区只有 123px，默认设置下圈和邮箱就已经被 overflow-hidden 裁掉了。 */}
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[216px] flex-col overflow-hidden border-r border-rule px-7 py-10 lg:flex">
         <LightFlower />
 
         <button
@@ -69,8 +75,10 @@ export default function Sidebar({
                       active ? 'text-ink' : 'text-ink-mute hover:text-ink-soft'
                     }`}
                   >
-                    {p.en}
-                    <span className="ml-2 text-[11px] text-ink-mute/80">{p.label}</span>
+                    <span className="whitespace-nowrap">{p.en}</span>
+                    <span className="ml-2 whitespace-nowrap text-[12px] text-ink-mute/80">
+                      {p.label}
+                    </span>
                     {active && (
                       <CircleMark
                         className="-inset-x-3.5 -inset-y-2 h-[calc(100%+16px)] w-[calc(100%+28px)]"
@@ -91,9 +99,10 @@ export default function Sidebar({
             href={EMAIL_HREF}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 block w-fit border-b border-rule text-[11px] leading-relaxed text-ink-soft transition-colors hover:border-mark hover:text-mark"
+            className="mt-2 block w-fit break-words border-b border-rule text-[11px] leading-relaxed text-ink-soft transition-colors hover:border-mark hover:text-mark"
           >
-            {EMAIL}
+            {EMAIL_LOCAL}
+            <wbr />@{EMAIL_DOMAIN}
           </a>
         </div>
       </aside>

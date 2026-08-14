@@ -14,9 +14,9 @@ import { useEffect, useRef } from 'react'
 import { useAnimationFrame, useMotionValue } from 'framer-motion'
 
 /* 画布坐标系：窄长一条，花心压在偏下方，花瓣向上散开、被侧栏裁切 */
-const VW = 188
+const VW = 216
 const VH = 860
-const CX = 84
+const CX = 98
 const CY = 820
 
 type PetalSpec = {

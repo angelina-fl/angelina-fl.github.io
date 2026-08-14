@@ -57,7 +57,7 @@ export default function Home() {
         pl-12 是给左边留的最小间隙，不然正文那条细线会贴到侧栏的分隔线上。
         xl 以下没有页边注，也就没有右侧那条空白，正文照旧居中、宽度维持 768。
       */}
-      <div className="relative z-10 lg:pl-[188px]">
+      <div className="relative z-10 lg:pl-[216px]">
         <div className="mx-auto flex w-full max-w-[1180px] justify-center xl:max-w-none xl:justify-end xl:pl-12 xl:pr-16">
           <main className="w-full max-w-[768px] border-rule px-6 pb-24 pt-20 sm:border-x sm:px-12 lg:pt-16 xl:max-w-[920px] xl:flex-1">
             <AnimatePresence mode="wait">
