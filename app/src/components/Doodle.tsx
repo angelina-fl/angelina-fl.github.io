@@ -13,14 +13,32 @@ type MarkProps = {
   strokeWidth?: number
 }
 
+const TRANSITION = (delay: number) => ({
+  pathLength: { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] as const },
+  opacity: { duration: 0.12, delay },
+})
+
+/** 正文里的批注：滚到跟前才起笔 */
 const draw = (delay: number) => ({
   initial: { pathLength: 0, opacity: 0 },
   whileInView: { pathLength: 1, opacity: 1 },
   viewport: { once: true, margin: '-40px' },
-  transition: {
-    pathLength: { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] as const },
-    opacity: { duration: 0.12, delay },
-  },
+  transition: TRANSITION(delay),
+})
+
+/**
+ * 整笔淡入，不走 pathLength。
+ *
+ * 侧栏选中圈是"我在哪一页"的指示，必须永远是完整的一圈，所以这里刻意
+ * 不用起笔动画：pathLength 动画靠 stroke-dasharray 实现，只要中途没跑完
+ * ——观察器没触发、标签页被切走、dash 长度和 non-scaling-stroke 在
+ * preserveAspectRatio="none" 的非等比缩放下对不上——都会留下一道断口。
+ * 正文里的批注无所谓（断了也只是少一笔装饰），选中态不行。
+ */
+const fadeIn = (delay: number) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.22, delay, ease: 'easeOut' as const },
 })
 
 /** 随手圈出来的一圈（末尾故意画过头一点） */
@@ -29,7 +47,11 @@ export function CircleMark({
   color = '#234A22',
   delay = 0,
   strokeWidth = 2,
-}: MarkProps) {
+  solid = false,
+}: MarkProps & {
+  /** true = 整笔淡入、永远画满（选中态用）；false = 滚到跟前才起笔（正文批注用） */
+  solid?: boolean
+}) {
   return (
     <svg
       viewBox="0 0 120 44"
@@ -44,7 +66,7 @@ export function CircleMark({
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
-        {...draw(delay)}
+        {...(solid ? fadeIn(delay) : draw(delay))}
       />
     </svg>
   )

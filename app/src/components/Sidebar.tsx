@@ -84,6 +84,7 @@ export default function Sidebar({
                         className="-inset-x-3.5 -inset-y-2 h-[calc(100%+16px)] w-[calc(100%+28px)]"
                         color="#234A22"
                         strokeWidth={1.6}
+                        solid
                       />
                     )}
                   </button>
