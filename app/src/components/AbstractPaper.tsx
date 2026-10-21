@@ -1,11 +1,7 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
-import { siteContent } from '@/content'
-
-const PAPER = siteContent.paper
-const COMMON = siteContent.common
-const PARAGRAPHS = PAPER.paragraphs
+import { useContent } from '@/i18n'
 
 export default function AbstractPaper({
   open,
@@ -14,6 +10,9 @@ export default function AbstractPaper({
   open: boolean
   onClose: () => void
 }) {
+  const { paper: PAPER, common: COMMON } = useContent()
+  const PARAGRAPHS = PAPER.paragraphs
+
   // 打开时锁定背景滚动，并支持 Esc 关闭
   useEffect(() => {
     if (!open) return

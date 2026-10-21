@@ -1,12 +1,12 @@
 import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import AgentFlowDemo from '@/components/AgentFlowDemo'
-import { siteContent } from '@/content'
-
-const EXPERIENCE = siteContent.experience
-const JOBS = EXPERIENCE.jobs
+import { useContent } from '@/i18n'
 
 export default function Experience() {
+  const EXPERIENCE = useContent().experience
+  const JOBS = EXPERIENCE.jobs
+
   return (
     <section id="experience">
       <SectionHeading

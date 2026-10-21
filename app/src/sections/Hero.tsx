@@ -3,9 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import type { PageKey } from '@/components/Sidebar'
 import { Underline } from '@/components/Doodle'
 import portrait from '@/assets/gallery/portrait-cutout.webp'
-import { siteContent } from '@/content'
-
-const HOME = siteContent.home
+import { useContent } from '@/i18n'
 
 /** 逐个元素依次入场 */
 const rise = (delay: number) => ({
@@ -15,6 +13,8 @@ const rise = (delay: number) => ({
 })
 
 export default function Hero({ onNavigate }: { onNavigate: (p: PageKey) => void }) {
+  const HOME = useContent().home
+
   return (
     <section id="top" className="relative sm:pb-16">
       {/* 眉题：栏目名 + 署名 */}

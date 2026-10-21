@@ -1,14 +1,15 @@
 import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import { HandNote, Squiggle } from '@/components/Doodle'
-import { siteContent } from '@/content'
-
-const CONTACT = siteContent.contact
-const EMAIL = siteContent.identity.email
-const EMAIL_HREF = siteContent.identity.emailHref
-const PHONE = siteContent.identity.phone
+import { useContent } from '@/i18n'
 
 export default function Contact() {
+  const siteContent = useContent()
+  const CONTACT = siteContent.contact
+  const EMAIL = siteContent.identity.email
+  const EMAIL_HREF = siteContent.identity.emailHref
+  const PHONE = siteContent.identity.phone
+
   return (
     <section id="contact">
       <SectionHeading

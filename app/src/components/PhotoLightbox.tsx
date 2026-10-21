@@ -2,9 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import { siteContent } from '@/content'
-
-const COMMON = siteContent.common
+import { useContent } from '@/i18n'
 
 /**
  * 照片查看器：点击图片左半边翻上一张、右半边翻下一张，到头自动绕回另一端。
@@ -23,6 +21,7 @@ export default function PhotoLightbox({
   open: boolean
   onClose: () => void
 }) {
+  const COMMON = useContent().common
   const [index, setIndex] = useState(startAt)
   /** 记录每张图的天然高宽比，超过 TALL_RATIO 视为长图 */
   const [ratios, setRatios] = useState<Record<string, number>>({})
@@ -116,7 +115,7 @@ export default function PhotoLightbox({
                       <motion.img
                         key={index}
                         src={photos[index]}
-                        alt={`剧日记截图 ${index + 1}`}
+                        alt={COMMON.screenshotAlt(index + 1)}
                         onLoad={(e) => recordRatio(e.currentTarget)}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -144,7 +143,7 @@ export default function PhotoLightbox({
                     <motion.img
                       key={index}
                       src={photos[index]}
-                      alt={`演出现场照片 ${index + 1}`}
+                      alt={COMMON.photoAlt(index + 1)}
                       onLoad={(e) => recordRatio(e.currentTarget)}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -192,7 +191,7 @@ export default function PhotoLightbox({
                       key={p}
                       type="button"
                       onClick={() => setIndex(n)}
-                      aria-label={`第 ${n + 1} 张`}
+                      aria-label={COMMON.nthDot(n + 1)}
                       aria-current={n === index}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         n === index ? 'w-5 bg-white/85' : 'w-1.5 bg-white/35 hover:bg-white/60'

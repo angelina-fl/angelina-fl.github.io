@@ -8,9 +8,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PhotoLightbox from './PhotoLightbox'
-import { siteContent } from '@/content'
-
-const COMMON = siteContent.common
+import { useContent } from '@/i18n'
 
 /* 文件名补了零，按键排序就是拍摄集的既定顺序 */
 const pick = (glob: Record<string, unknown>) =>
@@ -25,8 +23,6 @@ const FULLS = pick(
   import.meta.glob('../assets/gallery/album/full-*.webp', { eager: true, import: 'default' }),
 )
 
-const ALT = siteContent.photoBox.alts
-
 const N = CARDS.length
 const CARD_W = 84
 const CARD_H = CARD_W * (4 / 3)
@@ -38,6 +34,8 @@ const HOVER_LIFT = 20
 const TILTS = [-3, 2.4, -1.6, 3.2, -2.6, 1.2, -3.4, 2.8, -1, 3.6, -2.2]
 
 export default function PhotoBox() {
+  const { common: COMMON, photoBox } = useContent()
+  const ALT = photoBox.alts
   const [active, setActive] = useState<number | null>(null)
   const [open, setOpen] = useState(false)
   const [startAt, setStartAt] = useState(0)

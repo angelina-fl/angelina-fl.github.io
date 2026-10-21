@@ -2,12 +2,12 @@ import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import Monologue from '@/components/Monologue'
 import { HandNote } from '@/components/Doodle'
-import { siteContent } from '@/content'
-
-const ABOUT = siteContent.about
-const CARDS = ABOUT.cards
+import { useContent } from '@/i18n'
 
 export default function About() {
+  const ABOUT = useContent().about
+  const CARDS = ABOUT.cards
+
   return (
     <section id="about">
       <SectionHeading

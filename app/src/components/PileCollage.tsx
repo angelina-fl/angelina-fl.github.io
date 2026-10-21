@@ -17,7 +17,7 @@ import iconClaude from '@/assets/gallery/icon-claude.png'
 import iconFigma from '@/assets/gallery/icon-figma.png'
 import iconSql from '@/assets/gallery/icon-sql.png'
 import { Arrow, HandNote } from '@/components/Doodle'
-import { siteContent } from '@/content'
+import { useContent } from '@/i18n'
 
 type Photo = {
   src: string
@@ -41,14 +41,6 @@ const LAYOUT = [
   { id: 'paddle', src: pilePaddle, className: 'left-[57%] top-[43%] z-20 w-[23%] rotate-3', imageClassName: 'aspect-[3/4]' },
 ]
 
-const PHOTOS: Photo[] = LAYOUT.map((layout) => {
-  const copy = siteContent.pileCollage.photos.find((p) => p.id === layout.id)
-  return {
-    ...layout,
-    alt: copy?.alt ?? '',
-    caption: copy?.caption ?? undefined,
-  }
-})
 
 /**
  * 背景版式层：一张淡到几乎看不见的方格纸 + 四角裁切标记。
@@ -80,6 +72,15 @@ function Backdrop() {
 export default function PileCollage() {
   /** null = 灯箱关着；否则是被点开的那张的下标 */
   const [openAt, setOpenAt] = useState<number | null>(null)
+  const siteContent = useContent()
+  const PHOTOS: Photo[] = LAYOUT.map((layout) => {
+    const copy = siteContent.pileCollage.photos.find((p) => p.id === layout.id)
+    return {
+      ...layout,
+      alt: copy?.alt ?? '',
+      caption: copy?.caption ?? undefined,
+    }
+  })
 
   return (
     <div className="relative mx-auto h-[500px] w-full max-w-[980px] select-none sm:h-[620px]">

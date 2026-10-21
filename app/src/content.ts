@@ -1,7 +1,8 @@
 /**
  * 全站文案集中管理。
  *
- * 日常改字只改这个文件；改完重新打包单文件 HTML：
+ * 日常改字只改这个文件；英文版在 content.en.ts，结构与这里一一对应（改了中文记得同步英文）。
+ * 改完重新打包单文件 HTML：
  *   npx tsc -b && npx vite build --config vite.config.singlefile.ts
  *   cp dist/index.html "/Applications/  /个人站/孙菲潞-个人主页.html"
  *
@@ -63,6 +64,12 @@ export const siteContent = {
     casualShots: 'Solo Trip',
     tallPhotoHint: '长图 · 上下滚动查看',
     viewPhotoPrefix: '查看照片：',
+    viewNthPhoto: (title: string, n: number) => `查看${title}的第 ${n} 张照片`,
+    qrAlt: (title: string) => `${title}小程序码`,
+    screenshotAlt: (n: number) => `剧日记截图 ${n}`,
+    photoAlt: (n: number) => `演出现场照片 ${n}`,
+    nthDot: (n: number) => `第 ${n} 张`,
+    switchLang: 'Switch to English',
     thanks: 'Thx',
     backHome: '回到首页',
     play: '播放',
@@ -557,3 +564,5 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
     ],
   },
 }
+
+export type SiteContent = typeof siteContent

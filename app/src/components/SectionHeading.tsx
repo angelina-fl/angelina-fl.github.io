@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import Reveal from './Reveal'
+import { useLang } from '@/i18n'
 
 /**
  * Editorial 栏目头：眉题（栏目名 + 编号）压一条细线，
@@ -16,6 +17,8 @@ export default function SectionHeading({
   title: ReactNode
   lede?: ReactNode
 }) {
+  const { lang } = useLang()
+
   return (
     <Reveal>
       <header className="mb-12">
@@ -24,7 +27,12 @@ export default function SectionHeading({
           <p className="font-mono text-[10px] tracking-[0.18em] text-ink-mute">{index}</p>
         </div>
 
-        <h2 className="mt-7 font-display text-[32px] font-medium leading-[1.12] tracking-[0.08em] text-ink md:text-[42px]">
+        {/* 中文靠 0.08em 字距撑出呼吸感；英文字母拉这么开会散，收回到接近默认 */}
+        <h2
+          className={`mt-7 font-display text-[32px] font-medium leading-[1.12] text-ink md:text-[42px] ${
+            lang === 'zh' ? 'tracking-[0.08em]' : 'tracking-[-0.01em]'
+          }`}
+        >
           {title}
         </h2>
 

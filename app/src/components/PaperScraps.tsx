@@ -9,10 +9,7 @@
  * 一来宽屏下不会被拉成一张大卡片，二来读者把字号调大时整张卡跟着变宽，
  * 而不是文字换行撑破卡面。
  */
-import { siteContent } from '@/content'
-
-const PASS = siteContent.pileCollage.boardingPass
-const TICKET = siteContent.pileCollage.ticket
+import { useContent } from '@/i18n'
 
 /** 撕口两端的打孔：颜色跟纸面一致，看起来就是被咬掉一口 */
 function Notch({ className }: { className: string }) {
@@ -24,6 +21,7 @@ function Notch({ className }: { className: string }) {
 const CARD = 'photo-shadow flex rounded-[3px] border border-rule bg-paper-raised'
 
 export function BoardingPass({ className = '' }: { className?: string }) {
+  const PASS = useContent().pileCollage.boardingPass
   return (
     <div aria-hidden className={`${CARD} w-fit ${className}`}>
       <div className="px-2.5 py-[7px]">
@@ -71,6 +69,7 @@ const GOLD = '#D3AE6B'
 const GOLD_BRIGHT = '#E5C78D'
 
 export function TicketStub({ className = '' }: { className?: string }) {
+  const TICKET = useContent().pileCollage.ticket
   return (
     <div
       aria-hidden

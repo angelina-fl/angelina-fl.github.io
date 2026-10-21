@@ -2,17 +2,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Music2, X } from 'lucide-react'
 import { useState } from 'react'
 import { siteContent } from '@/content'
+import { useContent } from '@/i18n'
 
-const RECORD = siteContent.recordPlayer
-const COMMON = siteContent.common
-
-/** 网易云官方外链播放器（type=2 单曲，auto=0 不自动播放） */
-const OUTCHAIN_SRC = `https://music.163.com/outchain/player?type=2&id=${RECORD.songId}&auto=0&height=66`
-const SONG_URL = `https://music.163.com/song?id=${RECORD.songId}`
+/** 网易云官方外链播放器（type=2 单曲，auto=0 不自动播放）；歌曲 ID 两种语言共用 */
+const SONG_ID = siteContent.recordPlayer.songId
+const OUTCHAIN_SRC = `https://music.163.com/outchain/player?type=2&id=${SONG_ID}&auto=0&height=66`
+const SONG_URL = `https://music.163.com/song?id=${SONG_ID}`
 
 /** 右下角的翻唱唱片入口：纸面上放着的一张黑胶。点开面板后内嵌网易云外链播放器，站内直接播放。 */
 export default function RecordPlayer() {
   const [open, setOpen] = useState(false)
+  const { recordPlayer: RECORD, common: COMMON } = useContent()
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex items-end gap-3 sm:bottom-7 sm:right-7">

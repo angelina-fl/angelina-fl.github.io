@@ -2,12 +2,12 @@ import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import { Arrow, HandNote } from '@/components/Doodle'
 import uclPortico from '@/assets/gallery/ucl-portico.jpg'
-import { siteContent } from '@/content'
-
-const EDUCATION = siteContent.education
-const EDU = EDUCATION.items
+import { useContent } from '@/i18n'
 
 export default function Education() {
+  const EDUCATION = useContent().education
+  const EDU = EDUCATION.items
+
   return (
     <section id="education">
       <SectionHeading

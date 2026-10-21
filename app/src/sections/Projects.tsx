@@ -16,10 +16,7 @@ import jurijiCast from '@/assets/gallery/juriji-03.jpg'
 import jurijiNewShow from '@/assets/gallery/juriji-04.jpg'
 import jurijiAnnual from '@/assets/gallery/juriji-05.jpg'
 import jurijiQr from '@/assets/gallery/juriji-qrcode.png'
-import { siteContent } from '@/content'
-
-const PROJECTS_CONTENT = siteContent.projects
-const COMMON = siteContent.common
+import { useContent } from '@/i18n'
 
 type Project = {
   id: string
@@ -49,10 +46,6 @@ const PROJECT_ASSETS: Record<string, { qr?: string; photos?: string[] }> = {
   crew: { photos: [crewJazz, crewTech] },
 }
 
-const PROJECTS: Project[] = PROJECTS_CONTENT.items.map((p) => ({
-  ...p,
-  ...(PROJECT_ASSETS[p.id] ?? {}),
-}))
 
 /** 缩略图条：像贴在版面边上的几张小照片 */
 function PhotoStrip({
@@ -64,6 +57,7 @@ function PhotoStrip({
   title: string
   onOpen: (index: number) => void
 }) {
+  const COMMON = useContent().common
   const tilts = ['-rotate-2', 'rotate-1', '-rotate-1', 'rotate-2', '-rotate-3']
 
   return (
@@ -73,7 +67,7 @@ function PhotoStrip({
           key={src}
           type="button"
           onClick={() => onOpen(i)}
-          aria-label={`查看${title}的第 ${i + 1} 张照片`}
+          aria-label={COMMON.viewNthPhoto(title, i + 1)}
           className={`photo-shadow w-[86px] transition-transform duration-300 hover:-translate-y-1 hover:rotate-0 sm:w-[104px] ${tilts[i % tilts.length]}`}
         >
           <img
@@ -92,6 +86,11 @@ function PhotoStrip({
 export default function Projects() {
   const [paperOpen, setPaperOpen] = useState(false)
   const [lightbox, setLightbox] = useState<{ photos: string[]; startAt: number } | null>(null)
+  const { projects: PROJECTS_CONTENT, common: COMMON } = useContent()
+  const PROJECTS: Project[] = PROJECTS_CONTENT.items.map((p) => ({
+    ...p,
+    ...(PROJECT_ASSETS[p.id] ?? {}),
+  }))
 
   return (
     <section id="projects">
@@ -119,7 +118,7 @@ export default function Projects() {
 
       <div className="border-t border-rule">
         {PROJECTS.map((p, i) => (
-          <Reveal key={p.title} delay={0.06 + i * 0.08}>
+          <Reveal key={p.id} delay={0.06 + i * 0.08}>
             <article className="grid gap-5 border-b border-rule py-10 sm:grid-cols-[132px_1fr] sm:gap-8 xl:grid-cols-[160px_1fr]">
               {/* 左栏：时间、标签、小程序码 */}
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:block">
@@ -137,7 +136,7 @@ export default function Projects() {
                   <div className="mt-4 w-full sm:mt-6">
                     <img
                       src={p.qr}
-                      alt={`${p.title}小程序码`}
+                      alt={COMMON.qrAlt(p.title)}
                       loading="lazy"
                       draggable={false}
                       className="h-[84px] w-[84px]"

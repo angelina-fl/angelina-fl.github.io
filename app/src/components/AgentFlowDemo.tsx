@@ -9,9 +9,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Check, ChevronDown, RotateCw, Search } from 'lucide-react'
 import { HandNote } from '@/components/Doodle'
-import { siteContent } from '@/content'
+import { useContent } from '@/i18n'
 
-const DEMO = siteContent.experience.agentDemo
+/** 演示文案与数据：跟着当前语言走 */
+const useDemo = () => useContent().experience.agentDemo
 
 /**
  * 每步停留时长（毫秒），最后一步不再自动前进。
@@ -34,6 +35,7 @@ function Note({ children }: { children: React.ReactNode }) {
 
 /** 01 输入层：一个不可输入的搜索框，关键词逐字打出来 */
 function StageInput({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   const { keyword } = DEMO.input
   const [typed, setTyped] = useState(reduced ? keyword : '')
 
@@ -91,6 +93,7 @@ function StageInput({ reduced }: { reduced: boolean }) {
 
 /** 02 调用 Skill：把筛选标准固化成 SKILL.md，逐行「读」出来 */
 function StageSkill({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   return (
     <div>
       <p className="text-[12.5px] leading-[1.9] text-ink-soft">{DEMO.skill.caption}</p>
@@ -138,6 +141,7 @@ function StageSkill({ reduced }: { reduced: boolean }) {
 
 /** 03 抓取层：一个简化的浏览器窗口，卡片骨架依次流入 */
 function StageCrawl({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   return (
     <div>
       <p className="text-[12.5px] leading-[1.9] text-ink-soft">{DEMO.crawl.caption}</p>
@@ -198,6 +202,7 @@ function StageCrawl({ reduced }: { reduced: boolean }) {
 
 /** 03 筛选层：四条规则，点开看逻辑 */
 function StageFilter({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   const [open, setOpen] = useState<number | null>(null)
 
   return (
@@ -267,6 +272,7 @@ function StageFilter({ reduced }: { reduced: boolean }) {
 
 /** 04 去重层：命中结果流入，撞库的划掉 */
 function StageDedupe({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   return (
     <div>
       <p className="text-[12.5px] leading-[1.9] text-ink-soft">{DEMO.dedupe.caption}</p>
@@ -315,6 +321,7 @@ function StageDedupe({ reduced }: { reduced: boolean }) {
 
 /** 05 输出层：写回表格的样子 */
 function StageOutput({ reduced }: { reduced: boolean }) {
+  const DEMO = useDemo()
   return (
     <div>
       <p className="text-[12.5px] leading-[1.9] text-ink-soft">{DEMO.output.caption}</p>
@@ -373,6 +380,7 @@ function StageOutput({ reduced }: { reduced: boolean }) {
 
 /** 演示主体：步骤条 + 舞台区 */
 function Player() {
+  const DEMO = useDemo()
   const reduced = useReducedMotion() ?? false
   const [step, setStep] = useState(0)
   const [playing, setPlaying] = useState(true)
@@ -500,6 +508,7 @@ function Player() {
 }
 
 export default function AgentFlowDemo() {
+  const DEMO = useDemo()
   const reduced = useReducedMotion() ?? false
   const [open, setOpen] = useState(false)
 

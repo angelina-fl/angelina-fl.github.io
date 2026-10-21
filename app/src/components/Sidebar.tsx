@@ -5,7 +5,7 @@
  */
 import { CircleMark } from './Doodle'
 import LightFlower from './LightFlower'
-import { siteContent } from '@/content'
+import { useContent, useLang } from '@/i18n'
 
 export type PageKey =
   | 'home'
@@ -16,14 +16,31 @@ export type PageKey =
   | 'skills'
   | 'contact'
 
-export const PAGES = siteContent.nav as { key: PageKey; label: string; en: string }[]
+export type NavItem = { key: PageKey; label: string; en: string }
 
-const EMAIL = siteContent.identity.email
-const EMAIL_HREF = siteContent.identity.emailHref
-/* 侧栏窄，读者把字号调大时邮箱要折行。只在 @ 前留一个折行点，
-   否则 overflow-wrap 会从中间断开，出现 "…163.co / m" 这种断法。 */
-const [EMAIL_LOCAL, EMAIL_DOMAIN] = EMAIL.split('@')
-const COMMON = siteContent.common
+/** 中 / EN 切换：当前语言压实，另一个淡一些 */
+function LangToggle({ className = '' }: { className?: string }) {
+  const { lang, setLang } = useLang()
+  const { common } = useContent()
+  const opt = (l: 'zh' | 'en', text: string) => (
+    <span className={lang === l ? 'text-ink' : 'text-ink-mute transition-colors group-hover:text-ink-soft'}>
+      {text}
+    </span>
+  )
+  return (
+    <button
+      type="button"
+      onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
+      aria-label={common.switchLang}
+      title={common.switchLang}
+      className={`group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] ${className}`}
+    >
+      {opt('zh', '中')}
+      <span className="text-rule">/</span>
+      {opt('en', 'EN')}
+    </button>
+  )
+}
 
 /** 字标：FL.SUN，中间那个点是重点色 */
 function Wordmark({ className = '' }: { className?: string }) {
@@ -41,7 +58,13 @@ export default function Sidebar({
   page: PageKey
   onNavigate: (p: PageKey) => void
 }) {
-  const items = PAGES.filter((p) => p.key !== 'home')
+  const { lang } = useLang()
+  const { nav, identity, common: COMMON } = useContent()
+  const items = (nav as NavItem[]).filter((p) => p.key !== 'home')
+  /* 侧栏窄，读者把字号调大时邮箱要折行。只在 @ 前留一个折行点，
+     否则 overflow-wrap 会从中间断开，出现 "…163.co / m" 这种断法。 */
+  const [EMAIL_LOCAL, EMAIL_DOMAIN] = identity.email.split('@')
+  const EMAIL_HREF = identity.emailHref
 
   return (
     <>
@@ -76,9 +99,11 @@ export default function Sidebar({
                     }`}
                   >
                     <span className="whitespace-nowrap">{p.en}</span>
-                    <span className="ml-2 whitespace-nowrap text-[12px] text-ink-mute/80">
-                      {p.label}
-                    </span>
+                    {lang === 'zh' && (
+                      <span className="ml-2 whitespace-nowrap text-[12px] text-ink-mute/80">
+                        {p.label}
+                      </span>
+                    )}
                     {active && (
                       <CircleMark
                         className="-inset-x-3.5 -inset-y-2 h-[calc(100%+16px)] w-[calc(100%+28px)]"
@@ -95,6 +120,7 @@ export default function Sidebar({
         </nav>
 
         <div className="relative z-10 mt-auto">
+          <LangToggle className="mb-8" />
           <p className="label-xs">{COMMON.workAndCoop}</p>
           <a
             href={EMAIL_HREF}
@@ -109,8 +135,8 @@ export default function Sidebar({
       </aside>
 
       {/* 移动端：顶部横滑导航条 */}
-      <div className="fixed inset-x-0 top-0 z-40 border-b border-rule bg-paper/90 backdrop-blur-md lg:hidden">
-        <div className="flex items-center gap-5 overflow-x-auto px-5 py-3.5 [scrollbar-width:none]">
+      <div className="fixed inset-x-0 top-0 z-40 flex items-center border-b border-rule bg-paper/90 backdrop-blur-md lg:hidden">
+        <div className="flex min-w-0 flex-1 items-center gap-5 overflow-x-auto py-3.5 pl-5 pr-3 [scrollbar-width:none]">
           <button
             type="button"
             onClick={() => onNavigate('home')}
@@ -134,6 +160,8 @@ export default function Sidebar({
             </button>
           ))}
         </div>
+        {/* 切换按钮钉在右端，不跟着导航条横滑 */}
+        <LangToggle className="shrink-0 border-l border-rule py-1 pl-3 pr-5" />
       </div>
     </>
   )

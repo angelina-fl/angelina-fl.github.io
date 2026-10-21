@@ -1,12 +1,14 @@
 import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import PileCollage from '@/components/PileCollage'
-import { siteContent } from '@/content'
-
-const SKILLS = siteContent.skills
-const GROUPS = SKILLS.groups
+import { useContent, useLang } from '@/i18n'
 
 export default function Skills() {
+  const content = useContent()
+  const { lang } = useLang()
+  const SKILLS = content.skills
+  const GROUPS = SKILLS.groups
+
   return (
     <section id="skills">
       <SectionHeading
@@ -32,7 +34,7 @@ export default function Skills() {
                 <span className="font-display text-[14px] font-medium tracking-normal text-ink">
                   {g.title}
                 </span>
-                <span className="label-xs">{g.en}</span>
+                {lang === 'zh' && <span className="label-xs">{g.en}</span>}
               </div>
 
               <p className="text-[14px] leading-[1.9] text-ink-soft">
@@ -52,7 +54,7 @@ export default function Skills() {
       <Reveal delay={0.2}>
         <div className="mt-14">
           {/* 「Solo Trip」那句批注和箭头跟着照片走，挪进 PileCollage 里了 */}
-          <p className="mb-4 label-xs">{siteContent.common.offTheClock}</p>
+          <p className="mb-4 label-xs">{content.common.offTheClock}</p>
           <div className="-mx-6 sm:-mx-12">
             <PileCollage />
           </div>

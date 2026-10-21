@@ -7,36 +7,36 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { siteContent, type MarkedSeg } from '@/content'
+import { useContent, useLang } from '@/i18n'
+import type { MarkedSeg } from '@/content'
 
 type Seg = MarkedSeg
-
-const LINES: Seg[][] = siteContent.monologue.lines
+type FlatChar = { ch: string; line: number; lineStart: boolean }
 
 const chars = (s: string) => [...s]
 
 /** 打平成字符流，顺便记住每个字属于第几行、是不是行首 */
-const FLAT = LINES.flatMap((line, li) => {
-  let first = true
-  return line.flatMap((seg) =>
-    chars(seg.t).map((ch) => {
-      const item = { ch, line: li, lineStart: first }
-      first = false
-      return item
-    }),
-  )
-})
-const TOTAL = FLAT.length
+const flatten = (lines: Seg[][]): FlatChar[] =>
+  lines.flatMap((line, li) => {
+    let first = true
+    return line.flatMap((seg) =>
+      chars(seg.t).map((ch) => {
+        const item = { ch, line: li, lineStart: first }
+        first = false
+        return item
+      }),
+    )
+  })
 
-/** 标点后多停一会儿，模拟说话的断句 */
-function delayFor(index: number) {
+/** 标点后多停一会儿，模拟说话的断句。英文字符数大约是中文的三倍，逐字间隔相应压短 */
+function delayFor(flat: FlatChar[], index: number, fast: boolean) {
   if (index <= 0) return 0
-  const prev = FLAT[index - 1].ch
-  const base = 36
-  if (FLAT[index].lineStart) return 260
-  if ('。！？—'.includes(prev)) return base + 190
-  if ('，、；：'.includes(prev)) return base + 110
-  return base + Math.random() * 24
+  const prev = flat[index - 1].ch
+  const base = fast ? 14 : 36
+  if (flat[index].lineStart) return 260
+  if ('。！？—.!?'.includes(prev)) return base + 190
+  if ('，、；：,;:'.includes(prev)) return base + 110
+  return base + Math.random() * (fast ? 12 : 24)
 }
 
 const markClass = (seg: Seg) =>
@@ -77,6 +77,12 @@ function Line({ line, shown, cursor }: { line: Seg[]; shown: number; cursor: boo
 let played = false
 
 export default function Monologue({ className = '' }: { className?: string }) {
+  const { lang } = useLang()
+  const content = useContent()
+  const LINES: Seg[][] = content.monologue.lines
+  const FLAT = useMemo(() => flatten(LINES), [LINES])
+  const TOTAL = FLAT.length
+
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-10% 0px' })
 
@@ -90,13 +96,13 @@ export default function Monologue({ className = '' }: { className?: string }) {
 
   useEffect(() => {
     if (!inView || skipped || pos >= TOTAL) return
-    const timer = setTimeout(() => setPos((p) => p + 1), delayFor(pos))
+    const timer = setTimeout(() => setPos((p) => p + 1), delayFor(FLAT, pos, lang === 'en'))
     return () => clearTimeout(timer)
-  }, [inView, skipped, pos])
+  }, [inView, skipped, pos, FLAT, TOTAL, lang])
 
   useEffect(() => {
     if (skipped || pos >= TOTAL) played = true
-  }, [skipped, pos])
+  }, [skipped, pos, TOTAL])
 
   const shown = skipped ? TOTAL : pos
   const done = shown >= TOTAL
@@ -111,7 +117,7 @@ export default function Monologue({ className = '' }: { className?: string }) {
       rest -= len
       return take
     })
-  }, [shown])
+  }, [shown, LINES])
 
   const cursorLine = done ? -1 : FLAT[Math.min(shown, TOTAL - 1)].line
 
@@ -140,7 +146,7 @@ export default function Monologue({ className = '' }: { className?: string }) {
             onClick={() => setSkipped(true)}
             className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-mute transition-colors hover:text-mark"
           >
-            {siteContent.common.skip}
+            {content.common.skip}
           </button>
         )}
       </div>

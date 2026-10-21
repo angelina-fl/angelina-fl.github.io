@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Sidebar, { PAGES } from '@/components/Sidebar'
-import type { PageKey } from '@/components/Sidebar'
+import Sidebar from '@/components/Sidebar'
+import type { NavItem, PageKey } from '@/components/Sidebar'
 import Hero from '@/sections/Hero'
 import About from '@/sections/About'
 import Experience from '@/sections/Experience'
@@ -13,13 +13,14 @@ import RecordPlayer from '@/components/RecordPlayer'
 import PaperGlow from '@/components/PaperGlow'
 import PhotoBox from '@/components/PhotoBox'
 import { HandNote } from '@/components/Doodle'
-import { siteContent } from '@/content'
-
-const EMAIL_HREF = siteContent.identity.emailHref
-const COMMON = siteContent.common
+import { useContent, useLang } from '@/i18n'
 
 export default function Home() {
   const [page, setPage] = useState<PageKey>('home')
+  const { lang } = useLang()
+  const { nav, identity, common: COMMON } = useContent()
+  const PAGES = nav as NavItem[]
+  const EMAIL_HREF = identity.emailHref
 
   // 切页时回到顶部
   useEffect(() => {
@@ -87,7 +88,7 @@ export default function Home() {
                 <p className="label-xs">{COMMON.currentLabel}</p>
                 <p className="mt-1.5 font-display text-[13px] tracking-normal text-ink">
                   {current.en}
-                  <span className="ml-1.5 text-ink-mute">{current.label}</span>
+                  {lang === 'zh' && <span className="ml-1.5 text-ink-mute">{current.label}</span>}
                 </p>
               </div>
 
