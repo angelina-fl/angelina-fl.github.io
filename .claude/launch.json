@@ -4,20 +4,20 @@
     {
       "name": "gerenzhan",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8644", "--directory", "/Applications/  /个人站"],
+      "runtimeArgs": ["-m", "http.server", "8644", "--directory", "/Users/angelina_sun/Documents/我的资料/个人站"],
       "port": 8644
     },
     {
       "name": "dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "/Applications/  /个人站/app", "run", "dev"],
+      "runtimeArgs": ["--prefix", "/Users/angelina_sun/Documents/我的资料/个人站/app", "run", "dev"],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "dist",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8677", "--directory", "/Applications/  /个人站/app/dist"],
+      "runtimeArgs": ["-m", "http.server", "8677", "--directory", "/Users/angelina_sun/Documents/我的资料/个人站/app/dist"],
       "port": 8677
     }
   ]
