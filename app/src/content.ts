@@ -15,10 +15,10 @@ export const siteContent = {
   meta: {
     title: '孙菲潞 · 个人主页',
     description:
-      '孙菲潞 Angelina Sun 的个人主页 — UCL 文理双学位学士，即将攻读管理学硕士。游走在数据、AI 与舞台之间：AI 产品与增长、AI Agent、内容策略&产品运营与音乐剧创作。',
+      '孙菲潞 Angelina Sun 的个人主页 — UCL 管理学硕士在读，文理双学位本科。游走在数据、AI 与舞台之间：AI 产品增长、0→1 海外增长、AI Agent 与音乐剧创作。',
     ogTitle: '孙菲潞 · 个人主页 | Data by day, Stage by night',
     ogDescription:
-      'UCL 文理双学位学士，即将攻读管理学硕士。游走在数据、AI 与舞台之间：AI 产品与增长、AI Agent、内容策略&产品运营与音乐剧创作。',
+      'UCL 管理学硕士在读，文理双学位本科。游走在数据、AI 与舞台之间：AI 产品增长、0→1 海外增长、AI Agent 与音乐剧创作。',
     locale: 'zh_CN',
   },
 
@@ -30,8 +30,8 @@ export const siteContent = {
     /** 163 网页邮箱「写信」直达链接，收件人已预填（未登录时会先引导登录） */
     emailHref:
       'https://mail.163.com/js6/main.jsp?df=email163#module=compose.composeModule%7C%7B%22to%22%3A%22angelina_sun0618%40163.com%22%7D',
-    phone: '+86 177 9859 2006',
-    phoneHref: 'tel:+8617798592006',
+    phone: '+86 188 0626 0618',
+    phoneHref: 'tel:+8618806260618',
     based: '伦敦 London · 上海 Shanghai · 苏州 Suzhou',
     footerLine: '© 2026 · Written, staged & shipped by Angelina',
   },
@@ -82,13 +82,13 @@ export const siteContent = {
   home: {
     eyebrow: 'Home',
     signature: '孙菲潞 · Angelina Sun',
-    keywords: ['AI 产品与增长', 'AI Agent', '内容策略&产品运营', '音乐剧创作'],
+    keywords: ['AI 产品增长', '0→1 海外增长', 'AI Agent', '音乐剧创作'],
     titleLine1: 'Data by day,',
     titleHighlight: 'Stage by night',
     titleDot: '.',
     intro: [
-      '具备 AI 产品与增长实操经验，熟悉 AI Agent 工作流搭建与落地应用，理解大模型产品逻辑与用户场景。',
-      '曾主导 KOL 投放、SEM 三平台账户搭建及自媒体内容策略全链路执行；熟练使用 SQL、Python 进行数据分析，英文流利，具备跨国团队协作经验。',
+      '在开源 AI 客户端 Cherry Studio 做用户增长：主导 V2.0 发布期的 KOL 投放，带来 3.3 万增量用户；从 0 启动海外增长，并用 MCP 与 Skills 搭建达人挖掘 Agent，效率约为人工的 3.5 倍。',
+      '业余独立开发并上线了微信小程序「剧日记」，从需求洞察到冷启动一个人完成。熟练使用 SQL、Python 做数据分析，中英双语，习惯在跨国团队里协作。',
     ],
     primaryCta: '认识一下',
     emailCta: '写封邮件 ↗',
@@ -117,18 +117,18 @@ export const siteContent = {
       titleHighlight: '舞台',
       titleLine2After: '。',
       // 这三句是手动断行的（SectionHeading 的导语走 whitespace-pre-line）
-      lede: 'UCL 文理双学位，即将读管理学硕士。\n擅长于 AI 产品与增长方向的工作，业余在剧场做舞台管理和音响。',
+      lede: 'UCL 文理双学位本科毕业，现在读管理学硕士。\n擅长于 AI 产品与增长方向的工作，业余在剧场做舞台管理和音响。',
     },
     cards: [
       {
         num: '01',
         title: 'AI 产品与增长',
-        desc: '熟悉 AI Agent 工作流搭建与落地应用，理解大模型产品逻辑与用户场景；主导过 KOL 投放、三平台 SEM 账户搭建与自媒体内容策略的全链路执行。',
+        desc: '从投放、SEM、SEO 到内容矩阵都亲手做过：一次 31 位达人的发布期投放带来 3.3 万增量用户，海外 X 账号从 0 起步一个月涨粉约 1K。也会自己动手做产品——用 Claude Code 独立上线了一个 200+ 用户的小程序，用 MCP 与 Skills 搭过好几个能真正落地的 Agent。',
       },
       {
         num: '02',
         title: '数据分析',
-        desc: '熟练使用 Python、SQL、R 进行数据清洗与分析，在德勤咨询项目中定位约 30% 冗余数据，让数据准确率提升约 25%。',
+        desc: '熟练使用 Python、SQL、R，以及 GA4、Search Console 等分析工具。投放结束后独立做复盘：用基准期外推做增量归因、按量级分层算 CPM / CPE，还揪出了约 40 万疑似刷量播放；在德勤的项目里定位约 30% 冗余数据，让数据准确率提升约 25%。',
       },
       {
         num: '03',
@@ -151,12 +151,12 @@ export const siteContent = {
     },
     items: [
       {
-        period: '2026.09 — 2027.08',
+        period: '2026.09 — 2027.09',
         credential: '授课型硕士',
         degree: '管理学 MSc Management',
         school: '伦敦大学学院 University College London',
-        note: '即将入学',
-        detail: null,
+        note: '在读',
+        detail: '人工智能商业应用、商业统计、决策与风险分析、运营与技术管理、市场营销',
       },
       {
         period: '2023.09 — 2026.06',
@@ -165,7 +165,7 @@ export const siteContent = {
         school: '伦敦大学学院 University College London',
         note: null,
         detail:
-          '高二等一荣誉学位\n数据科学与可视化、量化方法、编程导论、计量经济学、高等数学、知识经济—企业咨询',
+          '二等一荣誉学位（2:1），均分 69.3；毕业论文研究 AI 生成艺术的作者权，获 Distinction\n数据科学与可视化、量化方法、编程导论、计量经济学、高等数学、知识经济—企业咨询',
       },
     ],
     photoAlt: '孙菲潞在 UCL 主楼 Wilkins Building 前',
@@ -186,16 +186,18 @@ export const siteContent = {
     },
     jobs: [
       {
-        period: '2026.06 — 2026.08',
+        period: '2026.06 — 至今',
         company: '上海千彗科技 · Cherry Studio',
-        role: '用户增长 & 产品运营',
-        tags: ['KOL 投放', 'AI Agent', 'SEM', '自媒体运营', 'C端/B端用户运营', '用户行为分析'],
+        role: '用户增长 & 产品运营 · 开源 AI 桌面客户端',
+        tags: ['KOL 投放', '增量归因', '海外增长', 'SEO / SEM', 'AI Agent', '内容矩阵'],
         points: [
-          '主导 Cherry Studio v2.0 发布的 KOL 投放策略，覆盖 Bilibili、抖音、小红书三平台，从 0-1 搭建 200+ AI 类博主达人资源库（粉丝量级 2K-100W），独立完成创作者筛选、价格谈判及合作落地全流程',
-          '担任自媒体运营负责人，统筹内容策略与选题规划，主导 v2.0 宣传片及各平台宣传执行；公众号单篇平均阅读量 3K，小红书账号一个月内涨粉 1.3K',
-          '基于 MCP 工具与 Skills 搭建专项 AI Agent，覆盖达人自动化抓取筛选、公众号选题排版、SEO 热点监控推送等场景，输出 Agent 设计方案及落地 SOP 文档',
-          '主导 360 点睛、百度、必应三平台 SEM 投放账户搭建，完成关键词分组策略与创意优化；CPC 下降约 48%，CTR 提升约 86%',
-          '负责企业直播前 B 端客资收集及播后付费转化，付费转化率达 6%',
+          'KOL 投放：负责 v2.0 发布期投放，从自建的 200+ AI 类达人库中筛出 31 位（头部 3、腰部 13、尾部 15），管理 31.55 万元预算，覆盖 B 站、小红书、抖音、视频号，独立完成筛选、谈价到合作落地；推广期日均新增从 5,760 提升到 8,754（+52%），增量获客 3.3 万人，单用户获客成本约 9.58 元，次日留存稳定在 46%，首充付费用户 +29%',
+          '投放复盘：独立完成整场复盘，用基准期外推做增量归因，按达人量级分层计算 CPM 和 CPE；识别出约 40 万疑似刷量播放并修正统计口径，最终输出下一轮的复投与淘汰名单',
+          '海外增长：从 0 启动官方 X 账号，一个月涨粉约 1K，单帖最高阅读 4.5K；担任官网 SEO 的 KR 负责人，诊断出下载转化未埋点、软 404 等问题，借助 Claude Code 完成转化埋点、sitemap 和 IndexNow 的开发并提交 PR，再按搜索量重写 65 个英文文档页标题',
+          'SEM 投放：搭建百度、360、必应三平台账户，完成关键词分组与创意优化，累计点击 11 万+；百度品牌词 CTR 从 31% 提升到 60%，CPC 从 0.72 元降到 0.31 元（-57%）',
+          'AI Agent：基于 MCP 和 Skills 搭建 B 站、抖音、公众号和视频号的达人挖掘 Agent，以及公众号排版 Agent；4 天筛选出 300+ 位有效达人，日均约 75 位，约为人工（约 20 位/天）的 3.5 倍（下面有一段可以点开的流程演示）',
+          '内容矩阵：运营公众号、小红书、B 站等 5 个平台（合计 4.8 万粉），统筹选题与 v2.0 宣传片；9 月全平台阅读和播放 8.5 万+，小红书一个月涨粉 1.3K',
+          'B 端转化：负责企业直播前的客资收集与播后付费转化，付费转化率达 6%',
         ],
       },
       {
@@ -204,7 +206,7 @@ export const siteContent = {
         role: '咨询',
         tags: ['SQL', 'Python', 'MDM', '咨询'],
         points: [
-          '参与罗氏制药 MDM 系统优化项目，使用 SQL 与 Python 清洗分析运营数据，定位约 30% 冗余数据',
+          '参与一家跨国药企的主数据管理（MDM）项目，使用 SQL 与 Python 清洗分析运营数据，定位约 30% 冗余记录',
           '梳理业务与 IT 需求差异，输出可视化 SOP 流程图，数据准确率提升约 25%，错误率降低约 15%',
           '将复杂系统逻辑转化为非技术团队可理解的方案文档，推动跨部门落地执行',
         ],
@@ -216,7 +218,7 @@ export const siteContent = {
         tags: ['海外增长', 'SEO', '社区运营'],
         points: [
           '通过分析目标受众搜索意图，结合 Flux、DeepSeek 等主流模型的技术特点，产出兼顾 SEO 友好性与内容专业度的 AI 技术文章；使用 Freepik AI 生成 SEO 封面图、Grammarly 辅助英文润色，建立完整的英文内容生产工具链',
-          '运营 Discord、X 等海外社区，基于 Google Keyword Planner 进行搜索意图分析，优化内容结构；X 平台单帖平均阅读量 2-3K，持续提升品牌海外曝光与用户触达效率',
+          '运营 Discord、X 等海外社区，基于 Google Keyword Planner 进行搜索意图分析，优化内容结构；X 平台单帖平均阅读量 3-4K，持续提升品牌海外曝光与用户触达效率',
           '持续跟踪大模型、多模态、AI Agent 等前沿方向技术演进，形成对模型能力边界与商业落地场景的判断框架',
         ],
       },
@@ -244,7 +246,7 @@ export const siteContent = {
       title: 'B 站达人调研 Agent',
       subtitle: '一次调用，从关键词到可投放的达人名单',
       intro:
-        '这是我在 Cherry Studio 独立搭建的 B 站达人调研 Agent 的简化流程演示，实际项目中处理了 10+ 次调用、成功挖掘 200+ 达人。',
+        '这是我在 Cherry Studio 独立搭建的 B 站达人调研 Agent 的简化流程演示。同一套逻辑后来复用到了抖音、公众号和视频号，4 天筛出 300+ 位有效达人。',
       replay: '重新跑一遍',
       running: '演示中',
       stepsLabel: '流程',
@@ -377,9 +379,9 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
         footer: '同步进飞书多维表格 → 进入报价谈判与合作排期',
       },
       stats: [
-        { value: '10+', label: '次实际调用' },
-        { value: '200+', label: '达人挖掘入库' },
-        { value: '3', label: '平台复用同套逻辑' },
+        { value: '300+', label: '4 天筛出的有效达人' },
+        { value: '3.5×', label: '人工筛选效率' },
+        { value: '4', label: '平台复用同套逻辑' },
       ],
     },
   },
@@ -397,11 +399,11 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
       {
         id: 'juriji',
         num: '01',
-        period: '2026.03 — 至今',
+        period: '2026.06 — 至今',
         title: '剧日记 · 我的观演足迹',
-        subtitle: 'vibe coding 项目 · 独立开发上线的微信小程序',
-        desc: '使用 Claude Code、Cursor、Figma 独立完成需求定义、UI 设计、开发与上线全流程，实现演出记录、OCR 票据解析等功能\n通过小红书冷启动实现 100+ 用户增长，持续追踪用户行为数据并迭代产品功能',
-        tags: ['独立开发', 'vibe coding', '100+ 用户', '部署上线'],
+        subtitle: 'vibe coding 项目 · 独立设计、开发并上线的微信小程序',
+        desc: '需求洞察：身边的剧迷都在用备忘录记观剧，没有一点仪式感；各个平台年底都有年度报告，剧迷却没有。于是把它定位成「观剧记录 + 年度报告」\nMVP：用 Claude Code、Cursor、Figma 一个人完成交互设计、前后端开发与上线；云函数接入百度 OCR 自动识别票根，再配上观演日历、开演前一天的微信订阅提醒和可分享的年度报告长图\n迭代与取舍：通过小红书冷启动获得 200+ 位用户，按反馈补上场馆联想输入、搜索空状态和反馈入口；「卡司排期识别」识别率不达标，果断下线，先保证核心体验',
+        tags: ['独立开发', 'vibe coding', '200+ 用户', '部署上线'],
         note: '扫码成为我的用户 ๑⁃̀⩊⁃́๑',
         paper: false,
       },
@@ -421,7 +423,7 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
         num: '03',
         period: '2024.10 — 2026.04',
         title: 'UCL CSSA & 慕幕',
-        subtitle: 'UCL CSSA 艺术团 · 中文音乐剧社团「慕幕 MuMusical」创始人',
+        subtitle: 'UCL CSSA 艺术团团长 · 中文音乐剧社团「慕幕 MuMusical」创始人',
         desc: '统筹管理 6 个艺术类社团，负责活动策划、预算管理及团队协调，并组织大型舞台演出活动（200+ 观众）\n创立 UCL 首个中文音乐剧社团「慕幕 MuMusical」，现主导原创中文音乐剧《邦锦美朵》的制作筹备，推动中文音乐剧在伦敦落地',
         tags: ['创始团队', '原创制作', '200+ 观众'],
         note: null,
@@ -455,12 +457,12 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
       {
         title: '技能',
         en: 'Skills',
-        items: ['Python', 'R', 'SQL', '数据分析', 'SEO / SEM', 'Agent 搭建'],
+        items: ['Python', 'R', 'SQL', '数据分析', '增量归因', 'SEO / SEM', 'Agent 搭建'],
       },
       {
         title: '工具',
         en: 'Tools',
-        items: ['Cursor', 'Claude Code', 'Codex', 'Cherry Studio', 'Figma', 'QLab'],
+        items: ['Claude Code', 'Cursor', 'Codex', 'MCP / Skills', 'Cherry Studio', 'Figma', 'GA4', 'Search Console', 'Bing Webmaster', 'QLab'],
       },
       {
         title: '语言',
@@ -470,7 +472,7 @@ if (idle > 60) return drop(up, '断更超过 60 天')`,
       {
         title: '兴趣',
         en: 'Interests',
-        items: ['钢琴', '自由潜', '游泳', '音乐剧', '羽毛球'],
+        items: ['钢琴（英皇八级）', '自由潜（AIDA 2 星）', '游泳', '音乐剧', '羽毛球'],
       },
     ],
   },

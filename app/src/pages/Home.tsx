@@ -10,6 +10,7 @@ import Education from '@/sections/Education'
 import Skills from '@/sections/Skills'
 import Contact from '@/sections/Contact'
 import RecordPlayer from '@/components/RecordPlayer'
+import LangToggle from '@/components/LangToggle'
 import PaperGlow from '@/components/PaperGlow'
 import PhotoBox from '@/components/PhotoBox'
 import { HandNote } from '@/components/Doodle'
@@ -45,6 +46,8 @@ export default function Home() {
       <PaperGlow />
       <Sidebar page={page} onNavigate={setPage} />
       <RecordPlayer />
+      {/* 桌面端语言切换钉在右上角；移动端放在顶部导航条里（见 Sidebar） */}
+      <LangToggle className="fixed right-6 top-5 z-50 hidden lg:inline-flex" />
 
       {/*
         Editorial 分栏：左目录 · 中正文（左右各一条细线）· 右页边注。

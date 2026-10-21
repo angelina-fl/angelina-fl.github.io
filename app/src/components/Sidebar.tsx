@@ -5,6 +5,7 @@
  */
 import { CircleMark } from './Doodle'
 import LightFlower from './LightFlower'
+import LangToggle from './LangToggle'
 import { useContent, useLang } from '@/i18n'
 
 export type PageKey =
@@ -17,30 +18,6 @@ export type PageKey =
   | 'contact'
 
 export type NavItem = { key: PageKey; label: string; en: string }
-
-/** 中 / EN 切换：当前语言压实，另一个淡一些 */
-function LangToggle({ className = '' }: { className?: string }) {
-  const { lang, setLang } = useLang()
-  const { common } = useContent()
-  const opt = (l: 'zh' | 'en', text: string) => (
-    <span className={lang === l ? 'text-ink' : 'text-ink-mute transition-colors group-hover:text-ink-soft'}>
-      {text}
-    </span>
-  )
-  return (
-    <button
-      type="button"
-      onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
-      aria-label={common.switchLang}
-      title={common.switchLang}
-      className={`group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] ${className}`}
-    >
-      {opt('zh', '中')}
-      <span className="text-rule">/</span>
-      {opt('en', 'EN')}
-    </button>
-  )
-}
 
 /** 字标：FL.SUN，中间那个点是重点色 */
 function Wordmark({ className = '' }: { className?: string }) {
@@ -120,7 +97,6 @@ export default function Sidebar({
         </nav>
 
         <div className="relative z-10 mt-auto">
-          <LangToggle className="mb-8" />
           <p className="label-xs">{COMMON.workAndCoop}</p>
           <a
             href={EMAIL_HREF}
@@ -161,7 +137,7 @@ export default function Sidebar({
           ))}
         </div>
         {/* 切换按钮钉在右端，不跟着导航条横滑 */}
-        <LangToggle className="shrink-0 border-l border-rule py-1 pl-3 pr-5" />
+        <LangToggle className="mr-4 shrink-0" />
       </div>
     </>
   )
